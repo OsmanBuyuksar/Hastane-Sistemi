@@ -1,5 +1,10 @@
 import 'package:doctor_consultation_app/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:doctor_consultation_app/components/request_sender.dart';
+import 'package:doctor_consultation_app/dataBaseClasses/doktor.dart';
+import 'package:doctor_consultation_app/dataBaseClasses/uzmanlik.dart';
+import 'package:doctor_consultation_app/dataBaseClasses/anabilim.dart';
+import 'package:http/http.dart' as http;
 
 class SearchBar extends StatelessWidget {
   @override
@@ -22,7 +27,7 @@ class SearchBar extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () async {print((await anabilimler()).anabilim_isimleri());},
             color: kOrangeColor,
             padding: EdgeInsets.symmetric(
               horizontal: 10,
@@ -32,9 +37,22 @@ class SearchBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             child: Image.asset('assets/icons/search.png'),
-          ),
+          )
         ),
       ],
     );
   }
 }
+
+Future<Doktorlar> doktorlar() async{
+  return parseDoktorlar(await listTable("doktor"));
+}
+
+Future<Uzmanliklar> uzmanliklar() async{
+  return parseUzmanlik(await listTable("uzmanlik"));
+}
+
+Future<Anabilimler> anabilimler() async{
+  return parseAnabilimler(await listTable("anabilimdali"));
+}
+
