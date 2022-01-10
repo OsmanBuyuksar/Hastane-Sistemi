@@ -27,7 +27,7 @@ class SearchBar extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: MaterialButton(
-            onPressed: () async {print((await anabilimler()).anabilim_isimleri());},
+            onPressed: () async {insertHasta("BuBirDenemedir", "Denenen hasta", "sifresi");},
             color: kOrangeColor,
             padding: EdgeInsets.symmetric(
               horizontal: 10,

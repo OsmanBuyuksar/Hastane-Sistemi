@@ -46,6 +46,63 @@ app.post('/doktor', (req,res) => {
         res.json(rows)
     })
 })
+
+app.post('/uzmanlik', (req,res) => {
+    console.log("got uzmanlik post request")
+    console.log(req.body)
+
+    const connection = getConnection()
+    console.log(req.headers)
+    const ad = req.body.Uzmanlik_adi
+
+
+    const query = "insert into Uzmanlik (Uzmanlik_adi) values( ? )"
+
+    connection.query(query, [ad],(err, rows, fields) => {
+        console.log(err) 
+        console.log("I think we inserted a anabilimdali")
+        res.json(rows)
+    })
+})
+
+app.post('/anabilim', (req,res) => {
+    console.log("got anabilim post request")
+    console.log(req.body)
+
+    const connection = getConnection()
+    console.log(req.headers)
+    const ad = req.body.Anabilim_adi
+
+    const query = "insert into Anabilimdali (Anabilim_adi) values( ? )"
+
+    connection.query(query, [ad],(err, rows, fields) => {
+        console.log(err) 
+        console.log("I think we inserted a anabilim")
+        res.json(rows)
+    })
+})
+
+
+app.post('/hasta', (req,res) => {
+    console.log("got hasta post request")
+    console.log(req.body)
+
+    const connection = getConnection()
+    console.log(req.headers)
+    const ad = req.body.Hasta_adi
+    const soyad = req.body.Hasta_soyadadi
+    const sifre = req.body.Hasta_sifresi
+
+    const query = "insert into Hasta (Hasta_adi, Hasta_soyadi, Hasta_sifresi) values( ?, ?, ? )"
+
+    connection.query(query, [ad,soyad,sifre],(err, rows, fields) => {
+        console.log(err) 
+        console.log("I think we inserted a hasta")
+        res.json(rows)
+    })
+})
+
+
 //server dinlemeye başladı
 const server = app.listen(3000);
 

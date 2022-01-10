@@ -16,3 +16,32 @@ Future<http.Response> insertDoctor(ad, soyad, sifre, anabilim) async {
     return response;
 }
 
+Future<http.Response> insertHasta(ad, soyad, sifre) async {
+  final response = await http.post(
+    Uri.parse('http://10.0.2.2:3000/hasta'),
+    
+    body: {'Hasta_adi': ad,'Hasta_soyadi': soyad,'Hasta_sifresi': sifre}
+  );
+    return response;
+}
+
+Future<http.Response> insertAnabilim(ad) async {
+  final response = await http.post(
+    Uri.parse('http://10.0.2.2:3000/anabilim'),
+    
+    body: {'Anabilim_adi': ad}
+  );
+    return response;
+}
+
+Future<http.Response> insertUzmanlik(ad) async {
+  final response = await http.post(
+    Uri.parse('http://10.0.2.2:3000/uzmanlik'),
+    
+    body: {'Uzmanlik_adi': ad}
+  );
+    return response;
+}
+
+
+
