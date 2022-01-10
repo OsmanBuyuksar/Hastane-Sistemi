@@ -3,7 +3,12 @@ import 'package:doctor_consultation_app/model/user_model.dart';
 import 'package:doctor_consultation_app/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key key}) : super(key: key);
@@ -17,19 +22,26 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _auth = FirebaseAuth.instance;
 
+  var link = "https://image.flaticon.com/icons/png/512/929/929744.png";
+
   // string for displaying the error Message
   String errorMessage;
 
-  final firstNameEditingController = TextEditingController();
-  final secondNameEditingController = TextEditingController();
+  final nameEditingController = TextEditingController();
+  final ageEditingController = TextEditingController();
+  final genderEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
+  final imageEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
+
+  File image;
+
   @override
   Widget build(BuildContext context) {
-    final firstNameField = TextFormField(
+    final nameField = TextFormField(
       autofocus: false,
-      controller: firstNameEditingController,
+      controller: nameEditingController,
       keyboardType: TextInputType.name,
       validator: (value) {
         RegExp regex = new RegExp(r'^.{3,}$');
@@ -42,37 +54,37 @@ class _SignupScreenState extends State<SignupScreen> {
         return null;
       },
       onSaved: (value) {
-        firstNameEditingController.text = value;
+        nameEditingController.text = value;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.account_circle),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "First NAME",
+        labelText: "Full Name",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
 
-    final secondNameField = TextFormField(
+    final ageField = TextFormField(
       autofocus: false,
-      controller: secondNameEditingController,
-      keyboardType: TextInputType.name,
+      controller: ageEditingController,
+      keyboardType: TextInputType.number,
       validator: (value) {
         if (value.isEmpty) {
-          return ("Second Name cannot be Empty");
+          return ("Age cannot be Empty");
         }
         return null;
       },
       onSaved: (value) {
-        secondNameEditingController.text = value;
+        ageEditingController.text = value;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.account_circle),
+        prefixIcon: const Icon(Icons.date_range),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Second NAME",
+        labelText: "Age",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -100,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.mail),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email ",
+        labelText: "Email Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -128,7 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Password",
+        labelText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -153,7 +165,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: " Confirm Password",
+        labelText: "Confirm Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -178,6 +190,55 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+
+    final genderField = DropdownButtonFormField(
+      hint: Text("choose your Gender"),
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.male),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        labelText: "Gender",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      items: ["Male", "female"]
+          .map((e) => DropdownMenuItem(
+                child: Text("${e}"),
+                value: e,
+              ))
+          .toList(),
+      onChanged: (val) {
+        setState(() {
+          genderEditingController.text = val;
+        });
+      },
+      value: null,
+    );
+
+    Future pickImage() async {
+      try {
+        final image =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
+        if (image != null) {
+          final ImageFile = File(image.path);
+
+          var nameimage = basename(image.path);
+          var refstorage = FirebaseStorage.instance.ref("images/${nameimage}");
+          await refstorage.putFile(ImageFile);
+          var url = await refstorage.getDownloadURL();
+          imageEditingController.text = url;
+
+          setState(() {
+            link = url;
+          });
+        } else {
+          print("please upload an image");
+        }
+      } on PlatformException catch (e) {
+        print("Failed to pick an image : ${e}");
+      }
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -202,25 +263,69 @@ class _SignupScreenState extends State<SignupScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        height: 150,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                      GestureDetector(
+                          onTap: pickImage,
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: 130,
+                                height: 130,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 4,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        color: Colors.black.withOpacity(0.1),
+                                        offset: Offset(0, 10))
+                                  ],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(link)),
+                                ),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 4,
+                                        color: Theme.of(context)
+                                            .scaffoldBackgroundColor,
+                                      ),
+                                      color: Colors.blueAccent,
+                                    ),
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.white,
+                                    ),
+                                  )),
+                            ],
+                          )),
                       const SizedBox(
                         height: 45,
                       ),
-                      firstNameField,
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      secondNameField,
+                      nameField,
                       const SizedBox(
                         height: 20,
                       ),
                       emailField,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      genderField,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ageField,
                       const SizedBox(
                         height: 20,
                       ),
@@ -296,8 +401,10 @@ class _SignupScreenState extends State<SignupScreen> {
     // writing all the values
     userModel.email = user.email;
     userModel.uid = user.uid;
-    userModel.firstName = firstNameEditingController.text;
-    userModel.secondName = secondNameEditingController.text;
+    userModel.name = nameEditingController.text;
+    userModel.age = ageEditingController.text;
+    userModel.gender = genderEditingController.text;
+    userModel.imageUrl = imageEditingController.text;
 
     await firebaseFirestore
         .collection("users")
@@ -305,7 +412,7 @@ class _SignupScreenState extends State<SignupScreen> {
         .set(userModel.toMap());
     Fluttertoast.showToast(msg: "Account created successfully :) ");
 
-    Navigator.of(context)
+    Navigator.of(this.context)
         .pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 }

@@ -2,7 +2,7 @@ import 'package:doctor_consultation_app/components/category_card.dart';
 import 'package:doctor_consultation_app/components/doctor_card.dart';
 import 'package:doctor_consultation_app/components/search_bar.dart';
 import 'package:doctor_consultation_app/constant.dart';
-import 'package:doctor_consultation_app/screens/info_screen.dart';
+import 'package:doctor_consultation_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                     IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => InfoScreen()));
+                              builder: (context) => ProfileScreen()));
                         },
                         icon: Icon(Icons.person)),
                   ],

@@ -1,4 +1,4 @@
-import 'package:doctor_consultation_app/screens/info_screen.dart';
+import 'package:doctor_consultation_app/screens/profile_screen.dart';
 import 'package:doctor_consultation_app/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.mail),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email",
+        labelText: "Email Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Password",
+        labelText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
