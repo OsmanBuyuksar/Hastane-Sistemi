@@ -1,4 +1,3 @@
-
 import 'package:doctor_consultation_app/components/category_card.dart';
 import 'package:doctor_consultation_app/components/doctor_card.dart';
 import 'package:doctor_consultation_app/components/request_listener.dart';
@@ -10,9 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class HomeScreen extends StatelessWidget {
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -74,7 +72,9 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              AnabilimList(),//buildCategoryList(),
+              //AnabilimList(),
+              buildCategoryList(
+                  "Genel\ncerrahi", "Dış\nHekimliği", "Göz\nKliniği"),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -89,7 +89,9 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              UzmanlikList(),//buildCategoryList(),
+              //UzmanlikList(),
+              buildCategoryList(
+                  "Beyin\ncerrahi", "Dış\nCerrahi", "Göz\nCerrahi"),
               SizedBox(
                 height: 20,
               ),
@@ -107,7 +109,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              DoctorList(),
+              buildDoctorList(), //DoctorList(),
             ],
           ),
         ),
@@ -115,7 +117,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  buildCategoryList() {
+  buildCategoryList(String _one, String _two, String _three) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -124,24 +126,33 @@ class HomeScreen extends StatelessWidget {
             width: 30,
           ),
           CategoryCard(
-            'Dental\nSurgeon',
-            'assets/icons/dental_surgeon.png',
+            'Dr. Stella Kane',
+            '${_one}',
+            'Heart Surgeon\nFlower Hospitals',
+            'assets/icons/heart_surgeon.png',
+            'assets/images/doctor1.png',
             kBlueColor,
           ),
           SizedBox(
             width: 10,
           ),
           CategoryCard(
-            'Heart\nSurgeon',
-            'assets/icons/heart_surgeon.png',
+            'Dr. Joseph Cart',
+            '${_two}',
+            'Dental Surgeon\nFlower Hospitals',
+            'assets/icons/dental_surgeon.png',
+            'assets/images/doctor2.png',
             kYellowColor,
           ),
           SizedBox(
             width: 10,
           ),
           CategoryCard(
-            'Eye\nSpecialist',
+            'Dr. Stephanie',
+            '${_three}',
+            'Eye Specialist \nFlower Hospitals',
             'assets/icons/eye_specialist.png',
+            'assets/images/doctor3.png',
             kOrangeColor,
           ),
           SizedBox(
@@ -152,7 +163,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  buildDoctorList(){
+  buildDoctorList() {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 30,
@@ -192,18 +203,17 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class AnabilimList extends StatefulWidget{
-
-  @override 
+/*class AnabilimList extends StatefulWidget {
+  @override
   _AnabilimListState createState() => _AnabilimListState();
 }
 
-class _AnabilimListState extends State<AnabilimList>{
+class _AnabilimListState extends State<AnabilimList> {
   httpListener listener = httpListener();
 
   @override
   void initState() {
-    listener.setupAnabilimlerListener();  
+    listener.setupAnabilimlerListener();
     super.initState();
   }
 
@@ -213,46 +223,44 @@ class _AnabilimListState extends State<AnabilimList>{
       padding: EdgeInsets.symmetric(
         horizontal: 30,
       ),
-      child: Container( 
-        child:
-          AnimatedBuilder(
-          animation: Listenable.merge([listener]),
-          builder: (context, snapshot){
-            return Container(
-              width: double.infinity,
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemCount: listener.a.anabilimler == null ? 0 : listener.a.anabilimler.length ,
-                itemBuilder: (BuildContext context,int index){
-                  return listener.a.anabilimler[index].name != null ? CategoryCard(listener.a.anabilimler[index].name, "assets/icons/eye_specialist.png", kYellowColor) : Divider();
-                }
-            )
-            );}
-          )
-      ),
+      child: Container(
+          child: AnimatedBuilder(
+              animation: Listenable.merge([listener]),
+              builder: (context, snapshot) {
+                return Container(
+                    width: double.infinity,
+                    height: 200,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: listener.a.anabilimler == null
+                            ? 0
+                            : listener.a.anabilimler.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return listener.a.anabilimler[index].name != null
+                              ? CategoryCard(
+                                  listener.a.anabilimler[index].name,
+                                  "assets/icons/eye_specialist.png",
+                                  kYellowColor)
+                              : Divider();
+                        }));
+              })),
     );
   }
-}
+}*/
 
-
-
-
-class DoctorList extends StatefulWidget{
-
+class DoctorList extends StatefulWidget {
   @override
   _DoctorListState createState() => _DoctorListState();
 }
 
-class _DoctorListState extends State<DoctorList>{
-
+class _DoctorListState extends State<DoctorList> {
   httpListener listener = httpListener();
 
   @override
   void initState() {
-    listener.setupDoktorlarListener();  
+    listener.setupDoktorlarListener();
     super.initState();
   }
 
@@ -262,41 +270,43 @@ class _DoctorListState extends State<DoctorList>{
       padding: EdgeInsets.symmetric(
         horizontal: 30,
       ),
-      child: Container( 
-        child:
-          AnimatedBuilder(
-          animation: Listenable.merge([listener]),
-          builder: (context, snapshot){
-            return Container(
-              width: double.infinity,
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemCount: listener.d.doktorlar == null ? 0 : listener.d.doktorlar.length ,
-                itemBuilder: (BuildContext context,int index){
-                  return listener.d.doktorlar[index].name != null ? DoctorCard(listener.d.doktorlar[index].name, listener.d.doktorlar[index].department, "assets/images/doctor3.png", kBlueColor) : Divider();
-                }
-            )
-            );}
-          )
-      ),
+      child: Container(
+          child: AnimatedBuilder(
+              animation: Listenable.merge([listener]),
+              builder: (context, snapshot) {
+                return Container(
+                    width: double.infinity,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: listener.d.doktorlar == null
+                            ? 0
+                            : listener.d.doktorlar.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return listener.d.doktorlar[index].name != null
+                              ? DoctorCard(
+                                  listener.d.doktorlar[index].name,
+                                  listener.d.doktorlar[index].department,
+                                  "assets/images/doctor3.png",
+                                  kBlueColor)
+                              : Divider();
+                        }));
+              })),
     );
   }
 }
 
-class UzmanlikList extends StatefulWidget{
-
+/*class UzmanlikList extends StatefulWidget {
   @override
   _UzmanlikListState createState() => _UzmanlikListState();
 }
 
-class _UzmanlikListState extends State<UzmanlikList>{
-
+class _UzmanlikListState extends State<UzmanlikList> {
   httpListener listener = httpListener();
 
   @override
   void initState() {
-    listener.setupUzmanliklarListener();  
+    listener.setupUzmanliklarListener();
     super.initState();
   }
 
@@ -306,26 +316,29 @@ class _UzmanlikListState extends State<UzmanlikList>{
       padding: EdgeInsets.symmetric(
         horizontal: 30,
       ),
-      child: Container( 
-        child:
-          AnimatedBuilder(
-          animation: Listenable.merge([listener]),
-          builder: (context, snapshot){
-            return Container(
-              width: double.infinity,
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                itemCount: listener.u.uzmanliklar == null ? 0 : listener.u.uzmanliklar.length ,
-                itemBuilder: (BuildContext context,int index){
-                  return listener.u.uzmanliklar[index].name != null ? CategoryCard(listener.u.uzmanliklar[index].name, "assets/icons/dental_surgeon.png", kOrangeColor) : Divider();
-                }
-            )
-            );}
-          )
-      ),
+      child: Container(
+          child: AnimatedBuilder(
+              animation: Listenable.merge([listener]),
+              builder: (context, snapshot) {
+                return Container(
+                    width: double.infinity,
+                    height: 200,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: listener.u.uzmanliklar == null
+                            ? 0
+                            : listener.u.uzmanliklar.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return listener.u.uzmanliklar[index].name != null
+                              ? CategoryCard(
+                                  listener.u.uzmanliklar[index].name,
+                                  "assets/icons/dental_surgeon.png",
+                                  kOrangeColor)
+                              : Divider();
+                        }));
+              })),
     );
   }
-}
+} */
