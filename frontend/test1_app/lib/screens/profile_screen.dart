@@ -24,7 +24,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String name = "";
   String age = "";
   String gender = "";
-  var imageUrl = "";
+  var imageUrl =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhwaLDKaK49tsHmdMGOrmTdns5qiw080F2Yw&usqp=CAU";
   var instance;
 
   File image;
@@ -45,6 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       age = loggedInUser.age;
       imageUrl = loggedInUser.imageUrl;
       print("${loggedInUser.email}");
+      print(imageUrl);
     });
   }
 
@@ -133,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage("${imageUrl}")),
+                                    image: NetworkImage(imageUrl)),
                               ),
                             ),
                             Positioned(

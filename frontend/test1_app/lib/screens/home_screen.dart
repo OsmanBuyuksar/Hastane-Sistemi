@@ -70,6 +70,21 @@ class HomeScreen extends StatelessWidget {
                 height: 20,
               ),
               buildCategoryList(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'Uzmanlık ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: kTitleTextColor,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              buildCategoryList(),
               SizedBox(
                 height: 20,
               ),
