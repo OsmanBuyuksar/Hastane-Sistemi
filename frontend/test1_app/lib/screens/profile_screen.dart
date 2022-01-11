@@ -24,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String name = "";
   String age = "";
   String gender = "";
-  var imageUrl =
+  var imageLink =
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhwaLDKaK49tsHmdMGOrmTdns5qiw080F2Yw&usqp=CAU";
   var instance;
 
@@ -44,9 +44,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       age = loggedInUser.age;
       gender = loggedInUser.gender;
       age = loggedInUser.age;
-      imageUrl = loggedInUser.imageUrl;
+      if (loggedInUser.imageUrl != null && loggedInUser.imageUrl != "") {
+        imageLink = loggedInUser.imageUrl;
+      }
       print("${loggedInUser.email}");
-      print(imageUrl);
+      print(imageLink);
     });
   }
 
@@ -63,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         loggedInUser.imageUrl = url;
 
         setState(() {
-          imageUrl = url;
+          imageLink = url;
         });
       } else {
         print("please upload an image");
@@ -135,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(imageUrl)),
+                                    image: NetworkImage(imageLink)),
                               ),
                             ),
                             Positioned(
