@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              buildCategoryList(),
+              AnabilimList(),//buildCategoryList(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              buildCategoryList(),
+              UzmanlikList(),//buildCategoryList(),
               SizedBox(
                 height: 20,
               ),
@@ -192,6 +192,54 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class AnabilimList extends StatefulWidget{
+
+  @override 
+  _AnabilimListState createState() => _AnabilimListState();
+}
+
+class _AnabilimListState extends State<AnabilimList>{
+  httpListener listener = httpListener();
+
+  @override
+  void initState() {
+    listener.setupAnabilimlerListener();  
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 30,
+      ),
+      child: Container( 
+        child:
+          AnimatedBuilder(
+          animation: Listenable.merge([listener]),
+          builder: (context, snapshot){
+            return Container(
+              width: double.infinity,
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemCount: listener.a.anabilimler == null ? 0 : listener.a.anabilimler.length ,
+                itemBuilder: (BuildContext context,int index){
+                  return listener.a.anabilimler[index].name != null ? CategoryCard(listener.a.anabilimler[index].name, "assets/icons/eye_specialist.png", kYellowColor) : Divider();
+                }
+            )
+            );}
+          )
+      ),
+    );
+  }
+}
+
+
+
+
 class DoctorList extends StatefulWidget{
 
   @override
@@ -204,7 +252,7 @@ class _DoctorListState extends State<DoctorList>{
 
   @override
   void initState() {
-    listener.setupDoktorlarListener();
+    listener.setupDoktorlarListener();  
     super.initState();
   }
 
@@ -227,6 +275,52 @@ class _DoctorListState extends State<DoctorList>{
                 itemCount: listener.d.doktorlar == null ? 0 : listener.d.doktorlar.length ,
                 itemBuilder: (BuildContext context,int index){
                   return listener.d.doktorlar[index].name != null ? DoctorCard(listener.d.doktorlar[index].name, listener.d.doktorlar[index].department, "assets/images/doctor3.png", kBlueColor) : Divider();
+                }
+            )
+            );}
+          )
+      ),
+    );
+  }
+}
+
+class UzmanlikList extends StatefulWidget{
+
+  @override
+  _UzmanlikListState createState() => _UzmanlikListState();
+}
+
+class _UzmanlikListState extends State<UzmanlikList>{
+
+  httpListener listener = httpListener();
+
+  @override
+  void initState() {
+    listener.setupUzmanliklarListener();  
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 30,
+      ),
+      child: Container( 
+        child:
+          AnimatedBuilder(
+          animation: Listenable.merge([listener]),
+          builder: (context, snapshot){
+            return Container(
+              width: double.infinity,
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemCount: listener.u.uzmanliklar == null ? 0 : listener.u.uzmanliklar.length ,
+                itemBuilder: (BuildContext context,int index){
+                  return listener.u.uzmanliklar[index].name != null ? CategoryCard(listener.u.uzmanliklar[index].name, "assets/icons/dental_surgeon.png", kOrangeColor) : Divider();
                 }
             )
             );}
