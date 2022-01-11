@@ -1,13 +1,18 @@
+
 import 'package:doctor_consultation_app/components/category_card.dart';
 import 'package:doctor_consultation_app/components/doctor_card.dart';
+import 'package:doctor_consultation_app/components/request_listener.dart';
 import 'package:doctor_consultation_app/components/search_bar.dart';
 import 'package:doctor_consultation_app/constant.dart';
+import 'package:doctor_consultation_app/databaseClasses/doktor.dart';
 import 'package:doctor_consultation_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class HomeScreen extends StatelessWidget {
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -102,7 +107,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              buildDoctorList(),
+              DoctorList(),
             ],
           ),
         ),
@@ -147,7 +152,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  buildDoctorList() {
+  buildDoctorList(){
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 30,
@@ -182,6 +187,50 @@ class HomeScreen extends StatelessWidget {
             height: 20,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DoctorList extends StatefulWidget{
+
+  @override
+  _DoctorListState createState() => _DoctorListState();
+}
+
+class _DoctorListState extends State<DoctorList>{
+
+  httpListener listener = httpListener();
+
+  @override
+  void initState() {
+    listener.setupDoktorlarListener();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 30,
+      ),
+      child: Container( 
+        child:
+          AnimatedBuilder(
+          animation: Listenable.merge([listener]),
+          builder: (context, snapshot){
+            return Container(
+              width: double.infinity,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemCount: listener.d.doktorlar == null ? 0 : listener.d.doktorlar.length ,
+                itemBuilder: (BuildContext context,int index){
+                  return listener.d.doktorlar[index].name != null ? DoctorCard(listener.d.doktorlar[index].name, listener.d.doktorlar[index].department, "assets/images/doctor3.png", kBlueColor) : Divider();
+                }
+            )
+            );}
+          )
       ),
     );
   }
