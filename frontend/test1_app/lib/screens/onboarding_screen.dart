@@ -30,7 +30,7 @@ class OnboardingScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Choose The Doctor\nYou Want',
+                      'Hoşgeldiniz',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
@@ -41,7 +41,7 @@ class OnboardingScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'Lorem ipsum dolor amet, consectetur\nadipiscing inet deli',
+                      '\tGiriş yapmak için tıklayın',
                       style: TextStyle(
                         fontSize: 16,
                         color: kTitleTextColor.withOpacity(0.7),
@@ -67,7 +67,7 @@ class OnboardingScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        'Get Started',
+                        'Giriş Yap',
                         style: TextStyle(
                           color: kWhiteColor,
                           fontSize: 16,

@@ -32,10 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value.isEmpty) {
-          return ("Please Enter Your E-mail");
+          return ("Lütfen E-mail'inizi giriniz");
         }
         if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("Please Enter a valid email");
+          return ("Lütfen geçerli bir mail giriniz");
         }
         return null;
       },
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.mail),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Email Address",
+        labelText: "Email Adresi",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -60,10 +60,10 @@ class _LoginScreenState extends State<LoginScreen> {
       validator: (value) {
         RegExp regex = new RegExp(r'^.{6,}$');
         if (value.isEmpty) {
-          return ("Password is required for login");
+          return ("Giriş yapmak için şifre gerekli");
         }
         if (!regex.hasMatch(value)) {
-          return ("Enter Valid Password(Min. 6 Character)");
+          return ("Geçerli bir şifre giriniz(Min. 6 karakter)");
         }
         return null;
       },
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Password",
+        labelText: "Şifre",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
           signIn(emailController.text, passwordController.text);
         },
         child: const Text(
-          "Login",
+          "Giriş",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text("don't have an account ? "),
+                          const Text("Hesabınız yok mu ? "),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           const SignupScreen()));
                             },
                             child: const Text(
-                              "SignUp",
+                              "Kayıt Ol",
                               style: TextStyle(
                                   color: Colors.blueAccent,
                                   fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
         await _auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
-                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Fluttertoast.showToast(msg: "Giriş Başarılı"),
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => HomeScreen())),
                 });
