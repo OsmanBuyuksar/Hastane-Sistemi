@@ -21,10 +21,18 @@ class httpListener extends ChangeNotifier{
        u = value as Uzmanliklar; 
        notifyListeners();
     });
+    doktorlar().asStream().listen((value) {
+       d = value as Doktorlar; 
+       notifyListeners();
+    });
   }
   void setupAnabilimlerListener(){
     anabilimler().asStream().listen((value) {
        a = value as Anabilimler; 
+       notifyListeners();
+    });
+    doktorlar().asStream().listen((value) {
+       d = value as Doktorlar; 
        notifyListeners();
     });
   }

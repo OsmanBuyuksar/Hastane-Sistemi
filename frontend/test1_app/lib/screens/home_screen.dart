@@ -72,9 +72,8 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              //AnabilimList(),
-              buildCategoryList(
-                  "Genel\ncerrahi", "Dış\nHekimliği", "Göz\nKliniği"),
+              AnabilimList(),
+              //buildCategoryList("Genel\ncerrahi", "Dış\nHekimliği", "Göz\nKliniği"),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
@@ -89,9 +88,8 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              //UzmanlikList(),
-              buildCategoryList(
-                  "Beyin\ncerrahi", "Dış\nCerrahi", "Göz\nCerrahi"),
+              UzmanlikList(),
+              //buildCategoryList("Beyin\ncerrahi", "Dış\nCerrahi", "Göz\nCerrahi"),
               SizedBox(
                 height: 20,
               ),
@@ -109,7 +107,8 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              buildDoctorList(), //DoctorList(),
+              //buildDoctorList(),
+              DoctorList(),
             ],
           ),
         ),
@@ -203,7 +202,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/*class AnabilimList extends StatefulWidget {
+class AnabilimList extends StatefulWidget {
   @override
   _AnabilimListState createState() => _AnabilimListState();
 }
@@ -230,25 +229,18 @@ class _AnabilimListState extends State<AnabilimList> {
                 return Container(
                     width: double.infinity,
                     height: 200,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: listener.a.anabilimler == null
-                            ? 0
-                            : listener.a.anabilimler.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return listener.a.anabilimler[index].name != null
-                              ? CategoryCard(
-                                  listener.a.anabilimler[index].name,
-                                  "assets/icons/eye_specialist.png",
-                                  kYellowColor)
-                              : Divider();
-                        }));
+                    child: ListView(
+                      scrollDirection: Axis.horizontal, 
+                      children: [
+                      CategoryCard(listener.d.doktorlar[0].name, listener.d.doktorlar[0].department, "Kalp cerrahi", 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kYellowColor),
+                      CategoryCard(listener.d.doktorlar[1].name, listener.d.doktorlar[1].department, "Göz cerrahi", 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[2].name, listener.d.doktorlar[2].department, "Diş Hekimliği", 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
+                    ],
+                  ));
               })),
     );
   }
-}*/
+}
 
 class DoctorList extends StatefulWidget {
   @override
@@ -296,7 +288,7 @@ class _DoctorListState extends State<DoctorList> {
   }
 }
 
-/*class UzmanlikList extends StatefulWidget {
+class UzmanlikList extends StatefulWidget {
   @override
   _UzmanlikListState createState() => _UzmanlikListState();
 }
@@ -323,22 +315,16 @@ class _UzmanlikListState extends State<UzmanlikList> {
                 return Container(
                     width: double.infinity,
                     height: 200,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: listener.u.uzmanliklar == null
-                            ? 0
-                            : listener.u.uzmanliklar.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return listener.u.uzmanliklar[index].name != null
-                              ? CategoryCard(
-                                  listener.u.uzmanliklar[index].name,
-                                  "assets/icons/dental_surgeon.png",
-                                  kOrangeColor)
-                              : Divider();
-                        }));
+                    child: ListView(
+                      scrollDirection: Axis.horizontal, 
+                      children: [
+                      CategoryCard(listener.d.doktorlar[0].name, "Kalp cerrahi", listener.d.doktorlar[0].department, 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kYellowColor),
+                      CategoryCard(listener.d.doktorlar[1].name, "Göz cerrahi", listener.d.doktorlar[1].department, 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[2].name,  "Diş cerrahi", listener.d.doktorlar[2].department, 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
+                    ],
+                  ));
               })),
+            
     );
   }
-} */
+}
