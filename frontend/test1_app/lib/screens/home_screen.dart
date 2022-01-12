@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Find Your Desired\nDoctor',
+                  'Aradığın \nDoktor',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 32,
@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Categories',
+                  'Anabilim Dalları',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kTitleTextColor,
@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Top Doctors',
+                  'Doktorlar',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: kTitleTextColor,

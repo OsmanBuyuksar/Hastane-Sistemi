@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return ListView(
                 children: [
                   Text(
-                    "Edit Profile",
+                    "Profili Düzenle",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                   ),
                   SizedBox(
@@ -166,10 +166,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(
                     height: 35,
                   ),
-                  buildTextField("Full Name", "${name}"),
-                  buildTextField("Email Address", "${email}"),
-                  buildTextField("Gender", "${gender}"),
-                  buildTextField("Age", "${age}"),
+                  buildTextField("Tam isim", "${name}"),
+                  buildTextField("Email adresi", "${email}"),
+                  buildTextField("Cinsiyet", "${gender}"),
+                  buildTextField("Yaş", "${age}"),
                   SizedBox(
                     height: 10,
                   ),
@@ -179,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => LoginScreen()));
                       },
-                      child: Text("Log Out")),
+                      child: Text("Çıkış yap")),
                 ],
               );
             },
