@@ -46,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
       validator: (value) {
         RegExp regex = new RegExp(r'^.{3,}$');
         if (value.isEmpty) {
-          return ("First Name cannot be Empty");
+          return ("Name cannot be Empty");
         }
         if (!regex.hasMatch(value)) {
           return ("Enter Valid name(Min. 3 Character)");
@@ -60,7 +60,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.account_circle),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Full Name",
+        labelText: "Ad Soyad",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -84,7 +84,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.date_range),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Age",
+        labelText: "yaş",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -112,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.mail),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Email Address",
+        labelText: "Email Adresi",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -140,7 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Password",
+        labelText: "Şifre",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -165,7 +165,7 @@ class _SignupScreenState extends State<SignupScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.vpn_key),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Confirm Password",
+        labelText: "Şifrenizi Tekrar Yazın",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -183,7 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: const Text(
-          "SignUp",
+          "Kayıt Ol",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -192,11 +192,11 @@ class _SignupScreenState extends State<SignupScreen> {
     );
 
     final genderField = DropdownButtonFormField(
-      hint: Text("choose your Gender"),
+      hint: Text("Cinsiyetinizi seçiniz"),
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.male),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        labelText: "Gender",
+        labelText: "Cinsiyet",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),

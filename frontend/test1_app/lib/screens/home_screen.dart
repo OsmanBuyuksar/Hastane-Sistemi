@@ -226,17 +226,17 @@ class _AnabilimListState extends State<AnabilimList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return Container(
+                return listener.d.doktorlar != null ? Container(
                     width: double.infinity,
                     height: 200,
                     child: ListView(
                       scrollDirection: Axis.horizontal, 
                       children: [
-                      CategoryCard(listener.d.doktorlar[0].name, listener.d.doktorlar[0].department, "Kalp cerrahi", 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kYellowColor),
-                      CategoryCard(listener.d.doktorlar[1].name, listener.d.doktorlar[1].department, "Göz cerrahi", 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[0].name, listener.d.doktorlar[0].department, "Kalp cerrahi", 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[1].name, listener.d.doktorlar[1].department, "Göz cerrahi", 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kYellowColor),
                       CategoryCard(listener.d.doktorlar[2].name, listener.d.doktorlar[2].department, "Diş Hekimliği", 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
                     ],
-                  ));
+                  )): Container();
               })),
     );
   }
@@ -266,23 +266,39 @@ class _DoctorListState extends State<DoctorList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return Container(
+                return  listener.d.doktorlar != null ? Container(
                     width: double.infinity,
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemCount: listener.d.doktorlar == null
-                            ? 0
-                            : listener.d.doktorlar.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return listener.d.doktorlar[index].name != null
-                              ? DoctorCard(
-                                  listener.d.doktorlar[index].name,
-                                  listener.d.doktorlar[index].department,
+                     child: ListView(
+                       shrinkWrap: true,
+                       physics: const ClampingScrollPhysics(),
+                       children: [
+                         DoctorCard(
+                                  listener.d.doktorlar[0].name,
+                                  listener.d.doktorlar[0].department,
+                                  "assets/images/doctor1.png",
+                                  kBlueColor),
+                          SizedBox(
+                            height: 15,
+                          ),
+                           DoctorCard(
+                                  listener.d.doktorlar[1].name,
+                                  listener.d.doktorlar[1].department,
+                                  "assets/images/doctor2.png",
+                                  kOrangeColor),
+                            SizedBox(
+                            height: 15,
+                          ),
+                             DoctorCard(
+                                  listener.d.doktorlar[2].name,
+                                  listener.d.doktorlar[2].department,
                                   "assets/images/doctor3.png",
-                                  kBlueColor)
-                              : Divider();
-                        }));
+                                  kYellowColor),
+                           SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                     )
+                     ) : Container(); 
               })),
     );
   }
@@ -312,17 +328,17 @@ class _UzmanlikListState extends State<UzmanlikList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return Container(
+                return listener.d.doktorlar != null ? Container(
                     width: double.infinity,
                     height: 200,
                     child: ListView(
                       scrollDirection: Axis.horizontal, 
                       children: [
-                      CategoryCard(listener.d.doktorlar[0].name, "Kalp cerrahi", listener.d.doktorlar[0].department, 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kYellowColor),
-                      CategoryCard(listener.d.doktorlar[1].name, "Göz cerrahi", listener.d.doktorlar[1].department, 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[0].name, "Kalp cerrahi", listener.d.doktorlar[0].department, 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kOrangeColor),
+                      CategoryCard(listener.d.doktorlar[1].name, "Göz cerrahi", listener.d.doktorlar[1].department, 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kYellowColor),
                       CategoryCard(listener.d.doktorlar[2].name,  "Diş cerrahi", listener.d.doktorlar[2].department, 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
                     ],
-                  ));
+                  )): Container();
               })),
             
     );
