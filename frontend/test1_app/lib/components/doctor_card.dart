@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 class DoctorCard extends StatelessWidget {
   var _name;
   var _description;
+  var _userId;
   var _imageUrl;
   var _bgColor;
 
-  DoctorCard(this._name, this._description, this._imageUrl, this._bgColor);
+  DoctorCard(this._name, this._userId, this._description, this._imageUrl,
+      this._bgColor);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,8 @@ class DoctorCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailScreen(_name, _description, _imageUrl),
+            builder: (context) =>
+                DetailScreen(_name, _userId, _description, _imageUrl),
           ),
         );
       },

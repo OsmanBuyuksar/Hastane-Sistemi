@@ -91,7 +91,7 @@ class HomeScreen extends StatelessWidget {
               UzmanlikList(),
               //buildCategoryList("Beyin\ncerrahi", "Dış\nCerrahi", "Göz\nCerrahi"),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               //buildDoctorList(),
               DoctorList(),
@@ -126,6 +126,7 @@ class HomeScreen extends StatelessWidget {
           ),
           CategoryCard(
             'Dr. Stella Kane',
+            '200',
             '${_one}',
             'Heart Surgeon\nFlower Hospitals',
             'assets/icons/heart_surgeon.png',
@@ -137,6 +138,7 @@ class HomeScreen extends StatelessWidget {
           ),
           CategoryCard(
             'Dr. Joseph Cart',
+            '201',
             '${_two}',
             'Dental Surgeon\nFlower Hospitals',
             'assets/icons/dental_surgeon.png',
@@ -148,6 +150,7 @@ class HomeScreen extends StatelessWidget {
           ),
           CategoryCard(
             'Dr. Stephanie',
+            '202',
             '${_three}',
             'Eye Specialist \nFlower Hospitals',
             'assets/icons/eye_specialist.png',
@@ -171,6 +174,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           DoctorCard(
             'Dr. Stella Kane',
+            '200',
             'Heart Surgeon\nFlower Hospitals',
             'assets/images/doctor1.png',
             kBlueColor,
@@ -180,6 +184,7 @@ class HomeScreen extends StatelessWidget {
           ),
           DoctorCard(
             'Dr. Joseph Cart',
+            '201',
             'Dental Surgeon\nFlower Hospitals',
             'assets/images/doctor2.png',
             kYellowColor,
@@ -189,6 +194,7 @@ class HomeScreen extends StatelessWidget {
           ),
           DoctorCard(
             'Dr. Stephanie',
+            '202',
             'Eye Specialist \nFlower Hospitals',
             'assets/images/doctor3.png',
             kOrangeColor,
@@ -226,17 +232,38 @@ class _AnabilimListState extends State<AnabilimList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return listener.d.doktorlar != null ? Container(
+                return Container(
                     width: double.infinity,
                     height: 200,
                     child: ListView(
-                      scrollDirection: Axis.horizontal, 
+                      scrollDirection: Axis.horizontal,
                       children: [
-                      CategoryCard(listener.d.doktorlar[0].name, listener.d.doktorlar[0].department, "Kalp cerrahi", 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kOrangeColor),
-                      CategoryCard(listener.d.doktorlar[1].name, listener.d.doktorlar[1].department, "Göz cerrahi", 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kYellowColor),
-                      CategoryCard(listener.d.doktorlar[2].name, listener.d.doktorlar[2].department, "Diş Hekimliği", 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
-                    ],
-                  )): Container();
+                        CategoryCard(
+                            listener.d.doktorlar[0].name,
+                            listener.d.doktorlar[0].userId,
+                            listener.d.doktorlar[0].department,
+                            "Kalp cerrahi",
+                            'assets/icons/heart_surgeon.png',
+                            'assets/images/doctor1.png',
+                            kYellowColor),
+                        CategoryCard(
+                            listener.d.doktorlar[1].name,
+                            listener.d.doktorlar[1].userId,
+                            listener.d.doktorlar[1].department,
+                            "Göz cerrahi",
+                            'assets/icons/eye_specialist.png',
+                            'assets/images/doctor2.png',
+                            kOrangeColor),
+                        CategoryCard(
+                            listener.d.doktorlar[2].name,
+                            listener.d.doktorlar[2].userId,
+                            listener.d.doktorlar[2].department,
+                            "Diş Hekimliği",
+                            'assets/icons/dental_surgeon.png',
+                            'assets/images/doctor3.png',
+                            kBlueColor),
+                      ],
+                    ));
               })),
     );
   }
@@ -266,39 +293,38 @@ class _DoctorListState extends State<DoctorList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return  listener.d.doktorlar != null ? Container(
+                return Container(
                     width: double.infinity,
-                     child: ListView(
-                       shrinkWrap: true,
-                       physics: const ClampingScrollPhysics(),
-                       children: [
-                         DoctorCard(
+                    child: ListView(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        children: <Widget>[
+                          DoctorCard(
                                   listener.d.doktorlar[0].name,
+                                  listener.d.doktorlar[0].userId,
                                   listener.d.doktorlar[0].department,
                                   "assets/images/doctor1.png",
                                   kBlueColor),
-                          SizedBox(
-                            height: 15,
-                          ),
-                           DoctorCard(
+                                  SizedBox(height: 10,),
+                          DoctorCard(
                                   listener.d.doktorlar[1].name,
+                                  listener.d.doktorlar[1].userId,
                                   listener.d.doktorlar[1].department,
                                   "assets/images/doctor2.png",
                                   kOrangeColor),
-                            SizedBox(
-                            height: 15,
-                          ),
-                             DoctorCard(
+                                  SizedBox(height: 10,),
+                          DoctorCard(
                                   listener.d.doktorlar[2].name,
+                                  listener.d.doktorlar[2].userId,
                                   listener.d.doktorlar[2].department,
                                   "assets/images/doctor3.png",
                                   kYellowColor),
-                           SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                     )
-                     ) : Container(); 
+                                  SizedBox(height: 15,),
+                                  
+
+                        ]
+                    ));
+                        
               })),
     );
   }
@@ -328,19 +354,39 @@ class _UzmanlikListState extends State<UzmanlikList> {
           child: AnimatedBuilder(
               animation: Listenable.merge([listener]),
               builder: (context, snapshot) {
-                return listener.d.doktorlar != null ? Container(
+                return Container(
                     width: double.infinity,
                     height: 200,
                     child: ListView(
-                      scrollDirection: Axis.horizontal, 
+                      scrollDirection: Axis.horizontal,
                       children: [
-                      CategoryCard(listener.d.doktorlar[0].name, "Kalp cerrahi", listener.d.doktorlar[0].department, 'assets/icons/heart_surgeon.png', 'assets/images/doctor1.png', kOrangeColor),
-                      CategoryCard(listener.d.doktorlar[1].name, "Göz cerrahi", listener.d.doktorlar[1].department, 'assets/icons/eye_specialist.png', 'assets/images/doctor2.png', kYellowColor),
-                      CategoryCard(listener.d.doktorlar[2].name,  "Diş cerrahi", listener.d.doktorlar[2].department, 'assets/icons/dental_surgeon.png', 'assets/images/doctor3.png', kBlueColor),
-                    ],
-                  )): Container();
+                        CategoryCard(
+                            listener.d.doktorlar[0].name,
+                            listener.d.doktorlar[0].userId, //
+                            "Kalp cerrahi",
+                            listener.d.doktorlar[0].department,
+                            'assets/icons/heart_surgeon.png',
+                            'assets/images/doctor1.png',
+                            kYellowColor),
+                        CategoryCard(
+                            listener.d.doktorlar[1].name,
+                            listener.d.doktorlar[1].userId,
+                            "Göz cerrahi",
+                            listener.d.doktorlar[1].department,
+                            'assets/icons/eye_specialist.png',
+                            'assets/images/doctor2.png',
+                            kOrangeColor),
+                        CategoryCard(
+                            listener.d.doktorlar[2].name,
+                            listener.d.doktorlar[2].userId,
+                            "Diş cerrahi",
+                            listener.d.doktorlar[2].department,
+                            'assets/icons/dental_surgeon.png',
+                            'assets/images/doctor3.png',
+                            kBlueColor),
+                      ],
+                    ));
               })),
-            
     );
   }
 }

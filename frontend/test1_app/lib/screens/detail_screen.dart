@@ -1,13 +1,32 @@
 import 'package:doctor_consultation_app/components/schedule_card.dart';
 import 'package:doctor_consultation_app/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:doctor_consultation_app/chatScreen/chat.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   var _name;
+  var _userId;
   var _description;
   var _imageUrl;
 
-  DetailScreen(this._name, this._description, this._imageUrl);
+  DetailScreen(this._name, this._userId, this._description, this._imageUrl);
+
+  @override
+  State<DetailScreen> createState() =>
+      _DetailScreenState(_name, _userId, _description, _imageUrl);
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  var _name;
+  var _userId;
+  var _description;
+  var _imageUrl;
+
+  _DetailScreenState(
+      this._name, this._userId, this._description, this._imageUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +88,7 @@ class DetailScreen extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Image.asset(
-                            _imageUrl,
+                            widget._imageUrl,
                             height: 120,
                           ),
                           SizedBox(
@@ -79,7 +98,7 @@ class DetailScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                _name,
+                                widget._name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
@@ -90,7 +109,7 @@ class DetailScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                _description,
+                                widget._description,
                                 style: TextStyle(
                                   color: kTitleTextColor.withOpacity(0.7),
                                 ),
@@ -113,16 +132,27 @@ class DetailScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 16,
                                   ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: kYellowColor.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Image.asset(
-                                      'assets/icons/chat.png',
-                                    ),
-                                  ),
+                                  GestureDetector(
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                          color: kYellowColor.withOpacity(0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Image.asset(
+                                          'assets/icons/chat.png',
+                                        ),
+                                      ),
+                                      onTap: () => {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatPage.hasta(
+                                                            ID: _userId.toString(),
+                                                            dName: _name,
+                                                            hastaMi: true)))
+                                          }),
                                   SizedBox(
                                     width: 16,
                                   ),

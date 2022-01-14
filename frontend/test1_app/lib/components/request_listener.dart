@@ -19,7 +19,7 @@ class httpListener extends ChangeNotifier{
   void setupUzmanliklarListener(){
     uzmanliklar().asStream().listen((value) {
        u = value as Uzmanliklar; 
-       notifyListeners();
+       //notifyListeners();
     });
     doktorlar().asStream().listen((value) {
        d = value as Doktorlar; 

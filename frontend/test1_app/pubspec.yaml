@@ -19,6 +19,7 @@ dependencies:
   firebase_auth: ^3.3.4
   firebase_core: ^1.10.6
   firebase_storage: ^10.2.4
+  web_socket_channel: ^2.0.0
   google_sign_in: ^5.2.1
   fluttertoast: ^8.0.8
   image_picker: ^0.8.4+4

@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
   var _name;
+  var _uId;
   var _title;
   var _description;
   var _imageUrl;
   var _doctorImg;
   var _bgColor;
 
-  CategoryCard(this._name, this._title, this._description, this._imageUrl,
-      this._doctorImg, this._bgColor);
+  CategoryCard(this._name, this._uId, this._title, this._description,
+      this._imageUrl, this._doctorImg, this._bgColor);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class CategoryCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                DetailScreen(_name, _description, _doctorImg)));
+                DetailScreen(_name, _uId, _description, _doctorImg)));
       },
       child: Container(
         width: 130,
