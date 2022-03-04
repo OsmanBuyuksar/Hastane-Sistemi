@@ -28,7 +28,7 @@
 
 ### Teknik Kısım :
 
-Uygulama ***Flutter*** kullanılarak yapılmıştır.  Mesajlaşma kısmında ***Websocket*** , backend tarafında ise ***Firebase*** ve ***Node.js*** kullanılmıştır. 
+- Uygulama ***Flutter*** kullanılarak yapılmıştır.  Mesajlaşma kısmında ***Websocket*** , backend tarafında ise ***Firebase*** ve ***Node.js*** kullanılmıştır.
 
 ![Screenshot_13](https://user-images.githubusercontent.com/56133248/156839244-abdc8496-a355-4ec6-9de8-12fae520ab20.png)
 
