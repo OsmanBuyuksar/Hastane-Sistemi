@@ -1,5 +1,15 @@
 # **Hastane Uygulaması**
 
+### Ekip :
+
+
+| İsim  | Link  | Görevi |
+|---|---|---|
+| - 👋 Osman Büyükşar   | [GitHub Profili -> ![](https://user-images.githubusercontent.com/56133248/156841715-8667ec6a-2e1c-48ba-a42e-6f6a09ff5478.png)](https://github.com/OsmanBuyuksar)  | Backend |
+| - 👋 Mazen Alghaberi   | [GitHub Profili -> ![](https://user-images.githubusercontent.com/56133248/156841715-8667ec6a-2e1c-48ba-a42e-6f6a09ff5478.png)](https://github.com/m3zen) | Frontend | 
+| - 👋 Yasin Ünal  | [GitHub Profili -> ![](https://user-images.githubusercontent.com/56133248/156841715-8667ec6a-2e1c-48ba-a42e-6f6a09ff5478.png)](https://github.com/Pilestin) | Messaging , Documentation |
+
+
 ### Amaç :
 
 - **Uygulama hasta ile doktoru buluşturan bir platformdur.**
