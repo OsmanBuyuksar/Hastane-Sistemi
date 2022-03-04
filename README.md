@@ -1,7 +1,10 @@
 # **Hastane Uygulaması**
 
-### Ekip :
+Bu proje Ondokuz Mayıs Üniversitesi Bilgisayar Mühendisliği bölümü Mobil Programlama( BİL 355 ) dersinde dönem ödevi olarak yapılmıştır. Proje 3 kişi tarafından gerçeklenmiştir. 
 
+▶️ Uygulamanın youtube videosunu izlemek için -> [![](https://icons.iconarchive.com/icons/papirus-team/papirus-apps/24/youtube-icon.png) Youtube](https://www.youtube.com/watch?v=H8iC5iBxwYk)
+
+### Ekip :
 
 | İsim  | Link  | Görevi |
 |---|---|---|
