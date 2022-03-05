@@ -20,7 +20,8 @@ Bu proje Ondokuz Mayıs Üniversitesi Bilgisayar Mühendisliği bölümü Mobil 
 - **Hasta aradığı doktoru bulduktan sonra , doktorun profiline gidip ona mesaj gönderebilir ve doktor da bu mesajı görebilir. Ayrıca doktorun profilinden detaylı bilgiye ulaşabilir.**
 - **Kısa bir gif :**
     
-   ![ezgif-2](https://user-images.githubusercontent.com/56133248/156839572-6eff8724-8983-439b-9760-e4a70f60c1e4.gif)
+   ![ezgif-2](https://user-images.githubusercontent.com/56133248/156839572-6eff8724-8983-439b-9760-e4a70f60c1e4.gif)   
+   ![ezgif-2-4277358adb](https://user-images.githubusercontent.com/56133248/156884027-22778069-7f10-4250-8563-7e98cc5b2ac1.gif)
 
     
 
